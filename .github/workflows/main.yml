@@ -44,7 +44,8 @@ jobs:
         sudo apt remove -y azure-cli* google-cloud-sdk* google-chrome-stable* firefox* powershell* mono-devel*
         sudo apt autoremove -y
         sudo apt clean
-        curl -sL https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest | grep -wo "https.*ffmpeg-.*linux64.*-gpl.tar.xz" | xargs curl -sL | sudo tar -xvJ --wildcards --strip-components 2 -C /usr/bin ffmpeg*/bin/ff*
+        curl -sL https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest | grep -wo "https.*ffmpeg-.*linux64.*-gpl-5.1.tar.xz" | xargs curl -sL | sudo tar -xvJ --wildcards --strip-components 2 -C /usr/bin ffmpeg*/bin/ff*
         curl -OL https://downloads.rclone.org/rclone-current-linux-amd64.deb && sudo dpkg -i rclone-current-linux-amd64.deb && rm rclone-*.deb
         curl -s https://api.github.com/repos/cloudflare/cloudflared/releases/latest | grep -m 1 -wo "https.*cloudflared-linux.*amd64" | xargs curl -o cloudflared -L && chmod +x cloudflared && sudo mv cloudflared /usr/bin
+        echo "YWxpYXMgMnBhc3M9J18ycGFzcygpeyBEVVJBVElPTj0kKGZmcHJvYmUgLWkgIiQxIiAtc2hvd19lbnRyaWVzIGZvcm1hdD1kdXJhdGlvbiAtdiBxdWlldCAtb2YgY3N2PSJwPTAiKTtTSVpFPSQyKjgwMDA7QklUUkFURT0kKGVjaG8gJHtTSVpFfS8ke0RVUkFUSU9OfSB8IGJjKTsgZmZtcGVnIC10aHJlYWRfcXVldWVfc2l6ZSA1MTIgLXkgLWkgIiQxIiAtYzp2IGxpYngyNjQgLXBpeF9mbXQgeXV2NDIwcDEwbGUgLXgyNjQtcGFyYW1zIGItYWRhcHQ9MjpyZWY9NjpyYy1sb29rYWhlYWQ9NjA6YmZyYW1lcz04IC1wc3ktcmQgMS4wOjEuMTUgLWI6diAke0JJVFJBVEV9ayAtYW4gLXNuIC1kbiAtcGFzcyAxIC1mIG1wNCAvZGV2L251bGw7ZmZtcGVnIC10aHJlYWRfcXVldWVfc2l6ZSA1MTIgLXkgLWkgIiQxIiAtYzp2IGxpYngyNjQgLXBpeF9mbXQgeXV2NDIwcDEwbGUgLXgyNjQtcGFyYW1zIGItYWRhcHQ9MjpyZWY9NjpyYy1sb29rYWhlYWQ9NjA6YmZyYW1lcz04IC1wc3ktcmQgMS4wOjEuMTUgLWI6diAke0JJVFJBVEV9ayAtYW4gLXNuIC1kbiAtcGFzcyAyICR7MSUuKn0tZW5jLm1wNDt9O18ycGFzcyc=" | base64 -d | sudo tee /etc/profile.d/2pass.sh
         sudo -u $SSHD_USER cloudflared tunnel --config "/home/${SSHD_USER}/.config/site.yml" --origincert "/home/${SSHD_USER}/.config/cert.pem" run
